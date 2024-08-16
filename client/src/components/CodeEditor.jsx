@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
 import { dracula } from "@uiw/codemirror-theme-dracula";
+import { loadLanguage } from "@uiw/codemirror-extensions-langs";
 
 function CodeEditor() {
   const [value, setValue] = useState("console.log('hello world!');");
@@ -14,7 +14,7 @@ function CodeEditor() {
       theme={dracula}
       value={value}
       height="100vh"
-      extensions={[javascript({ jsx: true })]}
+      extensions={[loadLanguage("javascript")]}
       onChange={onChange}
     />
   );
