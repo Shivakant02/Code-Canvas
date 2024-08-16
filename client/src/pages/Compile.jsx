@@ -1,6 +1,7 @@
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import CodeEditor from "../components/CodeEditor";
 import HelperHeader from "../components/HelperHeader";
+import RenderCode from "../components/RenderCode";
 
 function Compile() {
   return (
@@ -12,7 +13,7 @@ function Compile() {
         </Panel>
         <PanelResizeHandle className=" w-1 bg-black " />
         <Panel minSize={20} className=" w-full">
-          right
+          <RenderCode />
         </Panel>
       </PanelGroup>
     </div>
