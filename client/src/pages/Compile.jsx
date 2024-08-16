@@ -12,11 +12,7 @@ function Compile() {
         </Panel>
         <PanelResizeHandle className=" w-1 bg-black " />
         <Panel minSize={20} className=" w-full">
-          <PanelGroup direction="Vertical">
-            <Panel minSize={20}>two</Panel>
-            <PanelResizeHandle className=" h-1 bg-black" />
-            <Panel minSize={20}>Three</Panel>
-          </PanelGroup>
+          right
         </Panel>
       </PanelGroup>
     </div>

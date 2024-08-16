@@ -1,22 +1,23 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { loadLanguage } from "@uiw/codemirror-extensions-langs";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { updadeCodeValue } from "../redux/slices/compilerSlice";
 function CodeEditor() {
-  const { currentLanguage } = useSelector((state) => state.compiler);
-  console.log(currentLanguage);
-  const [value, setValue] = useState("console.log('hello world!');");
+  const dispatch = useDispatch();
+
+  const { currentLanguage, fullCode } = useSelector((state) => state.compiler);
+
   const onChange = useCallback((val) => {
-    console.log("val:", val);
-    setValue(val);
+    dispatch(updadeCodeValue(val));
   }, []);
+
   return (
     <CodeMirror
       theme={dracula}
-      value={value}
-      height="100vh"
+      value={fullCode[currentLanguage]}
+      height="calc(100vh - 110px)"
       extensions={[loadLanguage(currentLanguage)]}
       onChange={onChange}
     />
