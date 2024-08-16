@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
+import { dracula } from "@uiw/codemirror-theme-dracula";
 
 function CodeEditor() {
   const [value, setValue] = useState("console.log('hello world!');");
@@ -10,6 +11,7 @@ function CodeEditor() {
   }, []);
   return (
     <CodeMirror
+      theme={dracula}
       value={value}
       height="100vh"
       extensions={[javascript({ jsx: true })]}
