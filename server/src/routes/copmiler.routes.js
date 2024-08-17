@@ -1,6 +1,8 @@
-import express from "express";
+import { Router } from "express";
 import { saveCode } from "../controllers/compiler.controller.js";
 
-export const compilerRouter = express.Router();
+const router = Router();
 
-compilerRouter.post("/save", saveCode);
+router.post("/save", saveCode);
+
+export default router;

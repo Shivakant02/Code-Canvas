@@ -8,4 +8,5 @@ const codeSchema = Schema({
   },
 });
 
-export const Code = model("code", codeSchema);
+const Code = model("code", codeSchema);
+export default Code;
