@@ -12,3 +12,19 @@ export const saveCode = async (req, res) => {
     return res.status(500).send({ message: "Error saving code", error });
   }
 };
+
+export const loadCode = async (req, res) => {
+  const { urlId } = req.body;
+  try {
+    const existingCode = await Code.findById(urlId);
+    console.log(existingCode);
+
+    if (!existingCode) {
+      return res.status(404).send({ message: "Code not found" });
+    }
+
+    return res.status(200).send({ fullCode: existingCode.fullCode });
+  } catch (error) {
+    return res.status(500).send({ message: "Erro loading code", error });
+  }
+};
