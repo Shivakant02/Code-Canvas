@@ -1,10 +1,23 @@
 import { Save, Share2 } from "lucide-react";
 
-// import { useState } from "react";
+import axios from "axios";
+
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentLanguage } from "../redux/slices/compilerSlice";
-// import { useState } from "react";
+import { handleError } from "../utils/handleError";
 function HelperHeader() {
+  const { fullCode } = useSelector((state) => state.compiler);
+  const handleSave = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/compiler/save", {
+        fullCode: fullCode,
+      });
+      console.log(response.data);
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   const dispatch = useDispatch();
   const { currentLanguage } = useSelector((state) => state.compiler);
 
@@ -15,7 +28,7 @@ function HelperHeader() {
   return (
     <div className=" _helper_header h-[50px] bg-black text-white p-2 flex items-center justify-between gap-6">
       <div className="_btn_container flex gap-2">
-        <button className=" btn btn-success btn-sm ">
+        <button onClick={handleSave} className=" btn btn-success btn-sm ">
           <Save size={16} />
           Save
         </button>
