@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/compile" element={<Compile />} />
+        <Route path="/compile/:urlId" element={<Compile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

@@ -47,7 +47,7 @@ const initialState = {
 
 setInterval(updateTime, 1000);
 updateTime(); // Initial call to display time immediately
-de`,
+`,
   },
   currentLanguage: "html",
 };

@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 function RenderCode() {
   const { fullCode } = useSelector((state) => state.compiler);
-  console.log(fullCode);
 
   const combineCode = `
     <html>

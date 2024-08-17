@@ -7,7 +7,7 @@ export const saveCode = async (req, res) => {
       fullCode: fullCode,
     });
 
-    return res.status(201).send({ newCode });
+    return res.status(201).send({ url: newCode._id, status: "saved" });
   } catch (error) {
     return res.status(500).send({ message: "Error saving code", error });
   }
