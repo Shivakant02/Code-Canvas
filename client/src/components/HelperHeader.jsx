@@ -56,9 +56,37 @@ function HelperHeader() {
             </>
           )}
         </button>
-        <button className=" btn btn-primary btn-sm">
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={() => document.getElementById("my_modal_2").showModal()}
+        >
           <Share2 size={16} /> Share
         </button>
+        <dialog id="my_modal_2" className="modal">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg text-center mb-2">
+              {" "}
+              Share your Code!
+            </h3>
+            <div className=" flex flex-row gap-2 items-center">
+              <input
+                className=" w-5/6 outline-none rounded-md px-2 py-2 bg-black text-white"
+                type="text"
+                value={window.location.href}
+              />
+              <button className=" btn btn-outline btn-accent btn-sm">
+                Copy URL
+              </button>
+            </div>
+
+            <p className="py-4 text-center">
+              Share this URL with your friends to collaborate.
+            </p>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
       </div>
       <div className="_tab_switcher flex gap-2">
         <select
