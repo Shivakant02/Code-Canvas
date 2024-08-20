@@ -1,4 +1,4 @@
-import { Loader2, Save, Share2 } from "lucide-react";
+import { Copy, Loader2, Save, Share2 } from "lucide-react";
 
 import axios from "axios";
 
@@ -7,6 +7,7 @@ import { updateCurrentLanguage } from "../redux/slices/compilerSlice";
 import { handleError } from "../utils/handleError";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import toast from "react-hot-toast";
 function HelperHeader() {
   const [saveLoading, setSaveLoading] = useState(false);
 
@@ -74,8 +75,20 @@ function HelperHeader() {
                 type="text"
                 value={window.location.href}
               />
-              <button className=" btn btn-outline btn-accent btn-sm">
-                Copy URL
+              <button
+                onClick={() => {
+                  window.navigator.clipboard.writeText(window.location.href);
+                  toast("Link copied to clipboard", {
+                    position: "bottom-right",
+                    style: {
+                      background: "black",
+                      color: "white",
+                    },
+                  });
+                }}
+                className=" px-3 py-2 rounded-md border-2  border-accent text-accent hover:bg-accent ease-in-out duration-300 hover:text-black "
+              >
+                <Copy size={16} />
               </button>
             </div>
 

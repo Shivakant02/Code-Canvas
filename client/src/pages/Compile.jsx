@@ -8,6 +8,7 @@ import { handleError } from "../utils/handleError";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updadeFullCode } from "../redux/slices/compilerSlice";
+import toast from "react-hot-toast";
 
 function Compile() {
   const { urlId } = useParams();
@@ -21,6 +22,11 @@ function Compile() {
       });
       dispatch(updadeFullCode(response.data.fullCode));
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error?.response?.status === 500) {
+          toast.error("invalid URL, Default code loaded");
+        }
+      }
       handleError(error);
     }
   };
