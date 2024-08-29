@@ -61,7 +61,7 @@ export const login = async (req, res) => {
 
     user.password = undefined;
 
-    res.cookie("cookie", jwtToken, cookieOptions);
+    res.cookie("token", jwtToken, cookieOptions);
 
     return res.status(200).json({
       success: true,
