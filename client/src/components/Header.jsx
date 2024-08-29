@@ -9,8 +9,22 @@ function Header() {
       <ul className=" flex gap-2">
         <li>
           <Link to="/compile">
-            <button className=" btn btn-outline btn-sm btn-primary text-xl rounded-xl pb-2">
+            <button className=" btn btn-outline btn-sm btn-ghost text-xl rounded-md pb-2">
               Compiler
+            </button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/signup">
+            <button className=" btn  btn-sm btn-primary rounded-md">
+              Signup
+            </button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/login">
+            <button className=" btn  btn-sm btn-primary rounded-md">
+              Login
             </button>
           </Link>
         </li>
