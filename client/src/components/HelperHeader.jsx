@@ -1,33 +1,36 @@
 import { Copy, Loader2, Save, Share2 } from "lucide-react";
 
-import axios from "axios";
+// import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentLanguage } from "../redux/slices/compilerSlice";
 import { handleError } from "../utils/handleError";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import toast from "react-hot-toast";
+import { useSaveCodeMutation } from "../redux/slices/authApi";
 function HelperHeader() {
-  const [saveLoading, setSaveLoading] = useState(false);
+  // const [saveLoading, setSaveLoading] = useState(false);
+
+  const [saveCode, { isLoading }] = useSaveCodeMutation();
 
   const navigate = useNavigate();
 
   const { fullCode } = useSelector((state) => state.compiler);
 
   const handleSave = async () => {
-    setSaveLoading(true);
+    // setSaveLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/compiler/save", {
-        fullCode: fullCode,
-      });
+      // const response = await axios.post("http://localhost:5000/compiler/save", {
+      //   fullCode: fullCode,
+      // });
 
-      console.log(response.data);
-      navigate(`/compile/${response.data.url}`, { replace: true });
+      const response = await saveCode(fullCode).unwrap();
+
+      // console.log(response.data);
+      navigate(`/compile/${response.url}`, { replace: true });
     } catch (error) {
       handleError(error);
-    } finally {
-      setSaveLoading(false);
     }
   };
 
@@ -44,9 +47,9 @@ function HelperHeader() {
         <button
           onClick={handleSave}
           className=" btn btn-success btn-sm "
-          disabled={saveLoading}
+          disabled={isLoading}
         >
-          {saveLoading ? (
+          {isLoading ? (
             <>
               <Loader2 className=" animate-spin" /> Saving
             </>
