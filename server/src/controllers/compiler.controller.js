@@ -3,6 +3,12 @@ import Code from "../models/code.model.js";
 export const saveCode = async (req, res) => {
   try {
     const fullCode = req.body;
+
+    if (!fullCode.html && !fullCode.css && !fullCode.javascript) {
+      return res.status(400).send({
+        message: "Code cannot be blank",
+      });
+    }
     const newCode = await Code.create({
       fullCode: fullCode,
     });
