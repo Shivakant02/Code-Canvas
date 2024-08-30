@@ -2,7 +2,7 @@ import Code from "../models/code.model.js";
 
 export const saveCode = async (req, res) => {
   try {
-    const { fullCode } = req.body;
+    const fullCode = req.body;
     const newCode = await Code.create({
       fullCode: fullCode,
     });
