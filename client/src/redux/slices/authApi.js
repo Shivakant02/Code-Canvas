@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
+    credentials: "include",
   }),
   endpoints: (builder) => ({
     saveCode: builder.mutation({
@@ -19,7 +20,26 @@ export const authApi = createApi({
         body: body,
       }),
     }),
+    login: builder.mutation({
+      query: (body) => ({
+        url: "/user/login",
+        method: "POST",
+        body: body,
+        credentials: "include",
+      }),
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/user/logout",
+        method: "POST",
+      }),
+    }),
   }),
 });
 
-export const { useSaveCodeMutation, useLoadCodeMutation } = authApi;
+export const {
+  useSaveCodeMutation,
+  useLoadCodeMutation,
+  useLoginMutation,
+  useLogoutMutation,
+} = authApi;
