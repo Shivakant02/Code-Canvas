@@ -5,28 +5,27 @@ import RenderCode from "../components/RenderCode";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { handleError } from "../utils/handleError";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updadeFullCode } from "../redux/slices/compilerSlice";
-import toast from "react-hot-toast";
+import { useLoadCodeMutation } from "../redux/slices/authApi";
+import Loader from "../components/Loader";
 
 function Compile() {
+  const [loadExistingCode, { isLoading }] = useLoadCodeMutation();
   const { urlId } = useParams();
   // console.log(urlId);
   const dispatch = useDispatch();
 
   const loadCode = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/compiler/load", {
-        urlId: urlId,
-      });
-      dispatch(updadeFullCode(response.data.fullCode));
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error?.response?.status === 500) {
-          toast.error("invalid URL, Default code loaded");
-        }
+      // const response = await axios.post("http://localhost:5000/compiler/load", {
+      //   urlId: urlId,
+      // });
+      if (urlId) {
+        const response = await loadExistingCode({ urlId }).unwrap();
+        dispatch(updadeFullCode(response.fullCode));
       }
+    } catch (error) {
       handleError(error);
     }
   };
@@ -36,6 +35,13 @@ function Compile() {
       loadCode();
     }
   }, [urlId]);
+
+  if (isLoading)
+    return (
+      <div className=" w-full h-[calc(100vh-60px)] flex items-center justify-center">
+        <Loader />
+      </div>
+    );
 
   return (
     <div>
