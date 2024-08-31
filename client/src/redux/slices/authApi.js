@@ -12,7 +12,14 @@ export const authApi = createApi({
         body: fullCode,
       }),
     }),
+    loadCode: builder.mutation({
+      query: (body) => ({
+        url: "/compiler/load",
+        method: "POST",
+        body: body,
+      }),
+    }),
   }),
 });
 
-export const { useSaveCodeMutation } = authApi;
+export const { useSaveCodeMutation, useLoadCodeMutation } = authApi;
