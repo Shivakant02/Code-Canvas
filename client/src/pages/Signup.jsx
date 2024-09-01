@@ -1,10 +1,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useSignupMutation } from "../redux/slices/authApi";
 
 function Signup() {
-  const dispatch = useDispatch();
+  const [signup] = useSignupMutation();
   const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     username: "",
@@ -18,14 +18,21 @@ function Signup() {
       ...userInput,
       [name]: value,
     });
+  }
 
-    function handleSubmit(e) {
-      e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-      if (!userInput.email || !userInput.username || !userInput.password) {
-        toast.error("Please fill all the fields");
-        return;
-      }
+    if (!userInput.email || !userInput.username || !userInput.password) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+
+    const response = await signup(userInput).unwrap();
+
+    if (response.success) {
+      toast.success(response.message);
+      navigate("/login");
     }
   }
   return (
@@ -96,7 +103,10 @@ function Signup() {
             />
           </div>
           <div>
-            <button className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none">
+            <button
+              onClick={handleSubmit}
+              className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
+            >
               Signup
             </button>
           </div>
