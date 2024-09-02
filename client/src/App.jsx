@@ -5,8 +5,22 @@ import Compile from "./pages/Compile";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { useGetUserDetailsQuery } from "./redux/slices/authApi";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateCurrentUser, updateIsLoggedIn } from "./redux/slices/authSlice";
 
 function App() {
+  const { data, error } = useGetUserDetailsQuery();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(updateCurrentUser(data.user));
+      dispatch(updateIsLoggedIn(true));
+    }
+  }, [data, error]);
   return (
     <>
       <Header />
