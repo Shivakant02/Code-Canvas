@@ -4,10 +4,12 @@ import { config } from "dotenv";
 import dbConnect from "../src/config/dbConnect.js";
 import compilerRoutes from "./routes/copmiler.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import cookieParser from "cookie-parser";
 config();
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
     origin: [process.env.CLIENT_URL],
