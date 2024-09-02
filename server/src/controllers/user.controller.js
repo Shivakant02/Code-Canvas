@@ -89,3 +89,17 @@ export const logout = (req, res) => {
     });
   }
 };
+
+export const getUserData = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    return res.status(200).json({
+      success: true,
+      message: "User details",
+      user,
+    });
+  } catch (error) {
+    return next(new AppError("Can not fetch user details", 500));
+  }
+};
