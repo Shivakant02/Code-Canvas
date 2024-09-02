@@ -2,10 +2,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignupMutation } from "../redux/slices/authApi";
+import { useDispatch } from "react-redux";
+import { updateCurrentUser, updateIsLoggedIn } from "../redux/slices/authSlice";
 
 function Signup() {
   const [signup] = useSignupMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userInput, setUserInput] = useState({
     username: "",
     email: "",
@@ -32,7 +35,9 @@ function Signup() {
 
     if (response.success) {
       toast.success(response.message);
-      navigate("/login");
+      dispatch(updateCurrentUser(response.user));
+      dispatch(updateIsLoggedIn(true));
+      navigate("/");
     }
   }
   return (
@@ -63,7 +68,7 @@ function Signup() {
                 value={userInput.username}
                 id="username"
                 placeholder="Username"
-                className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
+                className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
               />
             </div>
             <div className="w-full flex flex-col gap-2">
@@ -80,7 +85,7 @@ function Signup() {
                 name="email"
                 id="email"
                 placeholder="abc@example.com"
-                className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
+                className=" text-white border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
               />
             </div>
           </div>
@@ -98,7 +103,7 @@ function Signup() {
               name="password"
               id="password"
               placeholder="••••••••"
-              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
+              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
               type="password"
             />
           </div>

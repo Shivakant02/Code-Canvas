@@ -27,7 +27,12 @@ export const signup = async (req, res, next) => {
     });
 
     await user.save();
+
+    const jwtToken = await user.generateJWTToken();
+
     user.password = undefined;
+
+    res.cookie("token", jwtToken, cookieOptions);
 
     return res.status(201).json({
       success: true,
