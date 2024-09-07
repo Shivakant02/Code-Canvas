@@ -1,4 +1,4 @@
-import { Copy, Loader2, Save, Share2 } from "lucide-react";
+import { ArrowDownToLine, Copy, Loader2, Save, Share2 } from "lucide-react";
 
 // import axios from "axios";
 
@@ -41,6 +41,52 @@ function HelperHeader() {
     const newLang = event.target.value;
     dispatch(updateCurrentLanguage(newLang));
   };
+
+  const handleDownloadCode = () => {
+    if (
+      fullCode.html === "" &&
+      fullCode.css === "" &&
+      fullCode.javascript === ""
+    ) {
+      toast.error("code is empty");
+    } else {
+      const htmlCode = new Blob([fullCode.html], { type: "text/html" });
+      const cssCode = new Blob([fullCode.css], { type: "text/css" });
+      const javascriptCode = new Blob([fullCode.javascript], {
+        type: "text/javascript",
+      });
+
+      const htmlLink = document.createElement("a");
+      const cssLink = document.createElement("a");
+      const jsLink = document.createElement("a");
+
+      htmlLink.href = URL.createObjectURL(htmlCode);
+      htmlLink.download = "index.html";
+      document.body.appendChild(htmlLink);
+
+      cssLink.href = URL.createObjectURL(cssCode);
+      cssLink.download = "style.css";
+      document.body.appendChild(cssLink);
+
+      jsLink.href = URL.createObjectURL(javascriptCode);
+      jsLink.download = "script.js";
+      document.body.appendChild(jsLink);
+
+      if (fullCode.html != "") {
+        htmlLink.click();
+      }
+      if (fullCode.css != "") {
+        cssLink.click();
+      }
+      if (fullCode.javascript != "") {
+        jsLink.click();
+      }
+
+      document.body.removeChild(htmlLink);
+      document.body.removeChild(cssLink);
+      document.body.removeChild(jsLink);
+    }
+  };
   return (
     <div className=" _helper_header h-[50px] bg-black text-white p-2 flex items-center justify-between gap-6">
       <div className="_btn_container flex gap-2">
@@ -59,6 +105,12 @@ function HelperHeader() {
               Save
             </>
           )}
+        </button>
+        <button
+          onClick={handleDownloadCode}
+          className=" btn btn-primary btn-sm"
+        >
+          <ArrowDownToLine size={18} />
         </button>
         <button
           className="btn btn-primary btn-sm"
