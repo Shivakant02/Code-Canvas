@@ -12,6 +12,8 @@ import { useSaveCodeMutation } from "../redux/slices/authApi";
 function HelperHeader() {
   // const [saveLoading, setSaveLoading] = useState(false);
 
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   const [saveCode, { isLoading }] = useSaveCodeMutation();
 
   const navigate = useNavigate();
@@ -90,34 +92,47 @@ function HelperHeader() {
   return (
     <div className=" _helper_header h-[50px] bg-black text-white p-2 flex items-center justify-between gap-6">
       <div className="_btn_container flex gap-2">
-        <button
-          onClick={handleSave}
-          className=" btn btn-success btn-sm "
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className=" animate-spin" /> Saving
-            </>
-          ) : (
-            <>
-              <Save size={16} />
-              Save
-            </>
-          )}
-        </button>
-        <button
-          onClick={handleDownloadCode}
-          className=" btn btn-primary btn-sm"
-        >
-          <ArrowDownToLine size={18} />
-        </button>
-        <button
-          className="btn btn-primary btn-sm"
-          onClick={() => document.getElementById("my_modal_2").showModal()}
-        >
-          <Share2 size={16} /> Share
-        </button>
+        {isLoggedIn ? (
+          <>
+            <button
+              onClick={handleSave}
+              className=" btn btn-success btn-sm "
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className=" animate-spin" /> Saving
+                </>
+              ) : (
+                <>
+                  <Save size={16} />
+                  Save
+                </>
+              )}
+            </button>
+            <button
+              onClick={handleDownloadCode}
+              className=" btn btn-primary btn-sm"
+            >
+              <ArrowDownToLine size={18} />
+            </button>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={() => document.getElementById("my_modal_2").showModal()}
+            >
+              <Share2 size={16} /> Share
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={handleDownloadCode}
+              className=" btn btn-primary btn-sm"
+            >
+              <ArrowDownToLine size={18} />
+            </button>
+          </>
+        )}
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg text-center mb-2">
