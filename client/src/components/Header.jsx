@@ -29,13 +29,27 @@ function Header() {
       <ul className=" gap-2 flex flex-row items-center justify-center">
         <li>
           <Link to="/compile">
-            <button className=" btn btn-outline btn-sm btn-ghost text-xl rounded-md pb-2">
+            <button className=" btn btn-primary btn-sm btn-link text-xl rounded-md pb-2">
               Compiler
             </button>
           </Link>
         </li>
         {isLoggedIn ? (
           <>
+            <li>
+              <Link to="/all-codes">
+                <button className=" btn btn-outline btn-info btn-sm rounded-md">
+                  All_Codes
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/my-codes">
+                <button className=" btn btn-outline btn-info btn-sm rounded-md">
+                  My_Codes
+                </button>
+              </Link>
+            </li>
             <li>
               <button
                 onClick={handleLogout}
