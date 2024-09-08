@@ -26,7 +26,10 @@ export const saveCode = async (req, res) => {
       ownerInfo: ownerInfo,
     });
 
-    // console.log(newCode);
+    user?.savedCodes.push(newCode._id);
+    await user.save();
+
+    // console.log(user);
 
     return res.status(201).send({ url: newCode._id, status: "saved" });
   } catch (error) {

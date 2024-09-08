@@ -27,7 +27,7 @@ const UserSchema = new Schema(
       default:
         "https://th.bing.com/th/id/OIP.vvmpWt0qBu3LeBgZuUfmGAHaFt?rs=1&pid=ImgDetMain",
     },
-    savedCodes: [{ type: mongoose.Schema.Types.ObjectId }],
+    savedCodes: [{ type: mongoose.Schema.Types.ObjectId, ref: "code" }],
   },
   { timeStamps: true }
 );
