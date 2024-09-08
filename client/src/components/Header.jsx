@@ -44,7 +44,7 @@ function Header() {
               </Link>
             </li>
             <li>
-              <Link to="/my-codes">
+              <Link to="/user/my-codes">
                 <button className=" btn btn-outline btn-info btn-sm rounded-md">
                   My_Codes
                 </button>

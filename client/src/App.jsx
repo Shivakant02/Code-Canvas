@@ -9,6 +9,7 @@ import { useGetUserDetailsQuery } from "./redux/slices/authApi";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateCurrentUser, updateIsLoggedIn } from "./redux/slices/authSlice";
+import MyCodes from "./pages/MyCodes";
 
 function App() {
   const { data, error } = useGetUserDetailsQuery();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/compile/:urlId" element={<Compile />} />
+        <Route path="/user/my-codes" element={<MyCodes />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
