@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 // import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSaveCodeMutation } from "../redux/slices/authApi";
+import { useState } from "react";
 function HelperHeader() {
+  const [title, setTitle] = useState("");
   // const [saveLoading, setSaveLoading] = useState(false);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -27,7 +29,7 @@ function HelperHeader() {
       //   fullCode: fullCode,
       // });
 
-      const response = await saveCode(fullCode).unwrap();
+      const response = await saveCode({ fullCode, title }).unwrap();
 
       // console.log(response.data);
       navigate(`/compile/${response.url}`, { replace: true });
@@ -95,7 +97,8 @@ function HelperHeader() {
         {isLoggedIn ? (
           <>
             <button
-              onClick={handleSave}
+              // onClick={handleSave}
+              onClick={() => document.getElementById("my_modal_1").showModal()}
               className=" btn btn-success btn-sm "
               disabled={isLoading}
             >
@@ -110,6 +113,33 @@ function HelperHeader() {
                 </>
               )}
             </button>
+            <dialog id="my_modal_1" className="modal">
+              <div className="modal-box">
+                <h3 className="font-bold text-lg text-center">
+                  Save your code
+                </h3>
+                <div className=" flex flex-row gap-2 items-center mt-3 ">
+                  <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className=" w-5/6 outline-none rounded-md px-2 py-2 bg-black text-white"
+                    type="text"
+                    placeholder="Enter your title"
+                  />
+                  <button
+                    onClick={handleSave}
+                    className=" px-3 py-2 rounded-md border-2  border-success text-success hover:bg-success ease-in-out duration-300 hover:text-black "
+                  >
+                    <Save size={16} />
+                  </button>
+                </div>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn">Close</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
             <button
               onClick={handleDownloadCode}
               className=" btn btn-primary btn-sm"
