@@ -6,6 +6,8 @@ const codeSchema = Schema({
     css: String,
     javascript: String,
   },
+  ownerInfo: { type: Schema.Types.ObjectId, ref: "User" },
+  ownerName: String,
 });
 
 const Code = model("code", codeSchema);
