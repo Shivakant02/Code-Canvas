@@ -29,7 +29,7 @@ const UserSchema = new Schema(
     },
     savedCodes: [{ type: mongoose.Schema.Types.ObjectId, ref: "code" }],
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 UserSchema.pre("save", async function (next) {

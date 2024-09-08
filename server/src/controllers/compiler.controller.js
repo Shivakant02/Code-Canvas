@@ -56,12 +56,15 @@ export const loadCode = async (req, res) => {
 
 export const getMyCodes = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).populate("savedCodes");
+    const user = await User.findById(req.user.id).populate({
+      path: "savedCodes",
+      options: { sort: { createdAt: -1 } },
+    });
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
 
-    return res.status(200).send({ myCodes: user.savedCodes });
+    return res.status(200).send(user.savedCodes);
   } catch (error) {
     return res.status(500).send({ message: "Error getting codes", error });
   }
