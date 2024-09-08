@@ -53,3 +53,16 @@ export const loadCode = async (req, res) => {
     return res.status(500).send({ message: "Erro loading code", error });
   }
 };
+
+export const getMyCodes = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).populate("savedCodes");
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    return res.status(200).send({ myCodes: user.savedCodes });
+  } catch (error) {
+    return res.status(500).send({ message: "Error getting codes", error });
+  }
+};
