@@ -51,7 +51,9 @@ export const authApi = createApi({
       }),
     }),
     getMyCodes: builder.query({
-      query: () => "/user/my-codes",
+      query: () => ({
+        url: "/user/my-codes",
+      }),
       providesTags: ["myCodes"],
     }),
   }),
