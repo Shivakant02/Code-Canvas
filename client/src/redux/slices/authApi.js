@@ -5,6 +5,7 @@ export const authApi = createApi({
     baseUrl: "http://localhost:5000",
     credentials: "include",
   }),
+  tagTypes: ["myCodes"],
   endpoints: (builder) => ({
     saveCode: builder.mutation({
       query: (fullCode) => ({
@@ -12,6 +13,7 @@ export const authApi = createApi({
         method: "POST",
         body: fullCode,
       }),
+      invalidatesTags: ["myCodes"],
     }),
     loadCode: builder.mutation({
       query: (body) => ({
@@ -48,6 +50,10 @@ export const authApi = createApi({
         cache: "no-store",
       }),
     }),
+    getMyCodes: builder.query({
+      query: () => "/user/my-codes",
+      providesTags: ["myCodes"],
+    }),
   }),
 });
 
@@ -58,4 +64,5 @@ export const {
   useLogoutMutation,
   useSignupMutation,
   useGetUserDetailsQuery,
+  useGetMyCodesQuery,
 } = authApi;
