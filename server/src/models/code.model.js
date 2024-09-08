@@ -6,6 +6,7 @@ const codeSchema = Schema({
     css: String,
     javascript: String,
   },
+  title: { type: String, required: true },
   ownerInfo: { type: Schema.Types.ObjectId, ref: "User" },
   ownerName: String,
 });

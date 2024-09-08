@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 
 export const saveCode = async (req, res) => {
   try {
-    const fullCode = req.body;
+    const { fullCode, title } = req.body;
 
     const user = await User.findById(req.user.id);
     if (!user) {
@@ -24,6 +24,7 @@ export const saveCode = async (req, res) => {
       fullCode: fullCode,
       ownerName: ownerName,
       ownerInfo: ownerInfo,
+      title: title,
     });
 
     user?.savedCodes.push(newCode._id);
