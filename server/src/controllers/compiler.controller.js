@@ -73,9 +73,23 @@ export const getMyCodes = async (req, res) => {
 export const deleteCode = async (req, res) => {
   try {
     const owner = await User.findById(req.user.id);
-    const { id } = req.params;
     if (!owner) {
       return res.status(404).send({ message: "user not found" });
+    }
+
+    const { id } = req.params;
+    const code = await Code.findById(id);
+    if (!code) {
+      return res.status(404).send({
+        message: "code not found",
+      });
+    }
+
+    if (owner.username !== code.ownerName) {
+      return res.status(400).send({
+        success: false,
+        message: "you don't have permission to delete the code",
+      });
     }
 
     const delCode = await Code.findByIdAndDelete(id);
