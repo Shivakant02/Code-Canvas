@@ -3,12 +3,11 @@ import { useGetMyCodesQuery } from "../redux/slices/authApi";
 
 function MyCodes() {
   const { data: myCodes } = useGetMyCodesQuery();
-  console.log(myCodes);
   return myCodes && myCodes.length !== 0 ? (
     <div className=" p-3 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-2">
       {" "}
-      {myCodes.map((item, idx) => (
-        <CodeItem key={idx} data={item} />
+      {myCodes.map((item) => (
+        <CodeItem key={item._id} data={item} />
       ))}{" "}
     </div>
   ) : (
