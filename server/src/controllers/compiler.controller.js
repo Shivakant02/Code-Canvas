@@ -69,3 +69,25 @@ export const getMyCodes = async (req, res) => {
     return res.status(500).send({ message: "Error getting codes", error });
   }
 };
+
+export const deleteCode = async (req, res) => {
+  try {
+    const owner = await User.findById(req.user.id);
+    const { id } = req.params;
+    if (!owner) {
+      return res.status(404).send({ message: "user not found" });
+    }
+
+    const delCode = await Code.findByIdAndDelete(id);
+    return res.status(200).send({
+      success: true,
+      message: "code deleted successfully",
+      delCode,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error deleting code",
+      error,
+    });
+  }
+};
