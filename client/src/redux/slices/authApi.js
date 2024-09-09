@@ -56,6 +56,13 @@ export const authApi = createApi({
       }),
       providesTags: ["myCodes"],
     }),
+    deleteCode: builder.mutation({
+      query: (_id) => ({
+        url: `/compiler/delete/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["myCodes"],
+    }),
   }),
 });
 
@@ -67,4 +74,5 @@ export const {
   useSignupMutation,
   useGetUserDetailsQuery,
   useGetMyCodesQuery,
+  useDeleteCodeMutation,
 } = authApi;
