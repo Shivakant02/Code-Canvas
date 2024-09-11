@@ -105,3 +105,17 @@ export const deleteCode = async (req, res) => {
     });
   }
 };
+
+export const getAllCodes = async (req, res) => {
+  try {
+    const allCodes = await Code.find().sort({ createdAt: -1 });
+    return res.status(200).send({
+      allCodes,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "error getting all codes",
+      error,
+    });
+  }
+};
