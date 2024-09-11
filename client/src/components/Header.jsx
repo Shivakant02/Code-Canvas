@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { handleError } from "../utils/handleError";
 import { useLogoutMutation } from "../redux/slices/authApi";
 import { updateCurrentUser, updateIsLoggedIn } from "../redux/slices/authSlice";
@@ -10,12 +10,13 @@ function Header() {
   const [logout] = useLogoutMutation();
   // console.log(isLoggedIn);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   async function handleLogout() {
     try {
       await logout().unwrap();
       dispatch(updateIsLoggedIn(false));
       dispatch(updateCurrentUser({}));
+      navigate("/");
     } catch (error) {
       handleError(error);
     }
