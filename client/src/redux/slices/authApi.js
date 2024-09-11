@@ -56,6 +56,13 @@ export const authApi = createApi({
       }),
       providesTags: ["myCodes"],
     }),
+    getAllCodes: builder.query({
+      query: () => ({
+        url: "/compiler/all-codes",
+        cache: "no-store",
+      }),
+      providesTags: ["myCodes"],
+    }),
     deleteCode: builder.mutation({
       query: (_id) => ({
         url: `/compiler/delete/${_id}`,
@@ -75,4 +82,5 @@ export const {
   useGetUserDetailsQuery,
   useGetMyCodesQuery,
   useDeleteCodeMutation,
+  useGetAllCodesQuery,
 } = authApi;

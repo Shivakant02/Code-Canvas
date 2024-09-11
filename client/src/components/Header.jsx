@@ -38,7 +38,7 @@ function Header() {
         {isLoggedIn ? (
           <>
             <li>
-              <Link to="/all-codes">
+              <Link to="compile/all-codes">
                 <button className=" btn btn-outline btn-info btn-sm rounded-md">
                   All_Codes
                 </button>
