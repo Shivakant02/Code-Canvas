@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { handleError } from "../utils/handleError";
 import { useDeleteCodeMutation } from "../redux/slices/authApi";
 import toast from "react-hot-toast";
-function CodeItem({ data }) {
+function CodeItem({ data, disable }) {
   const [deleteCode] = useDeleteCodeMutation();
 
   const handleDelete = async () => {
@@ -16,7 +16,7 @@ function CodeItem({ data }) {
     }
   };
   return (
-    <div className=" border-2 p-3 rounded border-slate-500 bg-slate-900">
+    <div className=" border-2 p-3 rounded-xl border-slate-500 bg-slate-900">
       <div className="flex justify-start items-center gap-1">
         <Code />
         <p className=" font-mono font-bold text-lg">{data.title}</p>
@@ -28,13 +28,13 @@ function CodeItem({ data }) {
         </Link>
 
         <button
+          disabled={disable}
           className="btn btn-sm btn-error"
           onClick={() => document.getElementById("my_modal_3").showModal()}
         >
           delete
         </button>
       </div>
-
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
