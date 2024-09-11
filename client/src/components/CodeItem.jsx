@@ -62,6 +62,7 @@ CodeItem.propTypes = {
     title: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,
   }).isRequired,
+  disable: PropTypes.string.isRequired,
 };
 
 export default CodeItem;
