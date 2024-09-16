@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { config } from "dotenv";
-import dbConnect from "../src/config/dbConnect.js";
-import compilerRoutes from "./routes/copmiler.routes.js";
-import userRoutes from "./routes/user.routes.js";
+import dbConnect from "./src/config/dbConnect.js";
+import compilerRoutes from "./src/routes/copmiler.routes.js";
+import userRoutes from "./src/routes/user.routes.js";
 import cookieParser from "cookie-parser";
 config();
 const app = express();
