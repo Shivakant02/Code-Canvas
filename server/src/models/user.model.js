@@ -1,4 +1,4 @@
-import { compare, hashSync } from "bcrypt";
+import { compare, hashSync } from "bcryptjs";
 import { config } from "dotenv";
 import jwt from "jsonwebtoken";
 import mongoose, { model, Schema } from "mongoose";
