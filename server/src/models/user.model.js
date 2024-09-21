@@ -1,4 +1,4 @@
-import { compare, hashSync } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { config } from "dotenv";
 import jwt from "jsonwebtoken";
 import mongoose, { model, Schema } from "mongoose";
@@ -37,12 +37,12 @@ UserSchema.pre("save", async function (next) {
     return next();
   }
   // const salt = genSalt();
-  this.password = await hashSync(this.password, 10);
+  this.password = await bcryptjs.hashSync(this.password, 10);
 });
 
 UserSchema.methods = {
   comparePassword: async function (newPassword) {
-    return await compare(newPassword, this.password);
+    return await bcryptjs.compare(newPassword, this.password);
   },
   generateJWTToken: async function () {
     return await jwt.sign(
