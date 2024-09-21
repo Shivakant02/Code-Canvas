@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],
+    origin: "https://code-canvas-client.vercel.app",
     credentials: true,
   })
 );
