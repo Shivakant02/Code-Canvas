@@ -3,12 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_APP_API_URI,
-    mode: "cors",
-    prepareHeaders: (headers) => {
-      headers.set("Access-Control-Allow-Origin", "*");
-      return headers;
-    },
-
+    mode: "no-cors",
     credentials: "include",
   }),
   tagTypes: ["myCodes"],
