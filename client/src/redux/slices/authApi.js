@@ -4,6 +4,14 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_APP_API_URI,
     mode: "cors",
+    prepareHeaders: (headers) => {
+      headers.set("Access-Control-Allow-Origin", "*");
+      headers.set(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT,PATCH, DELETE, OPTIONS"
+      );
+      return headers;
+    },
     credentials: "include",
   }),
   tagTypes: ["myCodes"],
