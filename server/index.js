@@ -10,6 +10,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static("dist"));
 // app.use(
 //   cors({
 //     origin: [process.env.CLIENT_URL],
