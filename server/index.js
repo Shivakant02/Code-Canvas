@@ -10,16 +10,16 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: [process.env.CLIENT_URL],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [process.env.CLIENT_URL],
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     credentials: true,
+//   })
+// );
 
-app.use("/compiler", compilerRoutes);
-app.use("/user", userRoutes);
+app.use("/api/compiler", compilerRoutes);
+app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
   return res.status(200).send("OK");
