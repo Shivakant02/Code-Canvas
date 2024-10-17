@@ -14,6 +14,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: ["https://code-canvas-client.vercel.app"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
 );
