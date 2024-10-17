@@ -11,22 +11,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 // app.use(express.static("dist"));
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://code-canvas-client.vercel.app"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
 app.use(
   cors({
-    origin: ["https://code-canvas-client.vercel.app"],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    origin: [process.env.CLIENT_URL],
     credentials: true,
   })
 );
